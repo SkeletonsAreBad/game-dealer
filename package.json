@@ -1,0 +1,32 @@
+{
+  "name": "game-dealer",
+  "version": "1.0.0",
+  "description": "Get deals on games in your Discord Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "lint": "standard"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "discord-bot",
+    "discordjs"
+  ],
+  "author": "SkeletonsAreBad <ok@skel.cc>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SkeletonsAreBad/game-dealer"
+  },
+  "homepage": "https://skel.cc/p/game-dealer",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "standard": "^14.3.4"
+  }
+}
