@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   name: 'prices',
@@ -24,23 +25,11 @@ module.exports = {
       })
     }
 
-    let embed
-    if (prices.length > 0) {
-      embed = {
-        color: process.env.EMBED_COLOR,
-        title: `Prices for "${args.join(' ')}"`,
-        description: `Here's what I could find for "${args.join(' ')}"`,
-        thumbnail: { url: res[0].thumb },
-        fields: prices
-      }
-    } else {
-      embed = {
-        color: process.env.EMBED_COLOR,
-        title: `Prices for "${args.join(' ')}"`,
-        description: `I couldn't find anything for "${args.join(' ')}"`
-      }
-    }
-
-    message.channel.send({ embed })
+    const embed = new MessageEmbed()
+      .setColor(process.env.EMBED_COLOR)
+      .setTitle(`Prices for **${args.join(' 0')}**`)
+      .setDescription(prices.length ? `Here's what I could find for "${args.join(' ')}"` : `I couldn't find anything for "${args.join(' ')}"`)
+      .addFields(prices)
+    message.channel.send(embed)
   }
 }
