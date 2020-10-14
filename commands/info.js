@@ -1,10 +1,16 @@
+const Command = require('../util/Command.js')
 const { description, version, repository, homepage, dependencies } = require('../package.json')
 const { MessageEmbed } = require('discord.js')
 
-module.exports = {
-  name: 'info',
-  description: 'Get information about the bot.',
-  execute (message, args) {
+class Info extends Command {
+  constructor () {
+    super({
+      name: 'info',
+      description: 'Get information about the bot.'
+    })
+  }
+
+  async run (message, args) {
     const embed = new MessageEmbed()
       .setColor(process.env.EMBED_COLOR)
       .setTitle(message.client.user.username)
@@ -20,3 +26,5 @@ module.exports = {
     message.channel.send(embed)
   }
 }
+
+module.exports = Info

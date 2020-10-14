@@ -1,10 +1,15 @@
+const Command = require('../util/Command.js')
 const { MessageEmbed } = require('discord.js')
 
-module.exports = {
-  name: 'help',
-  description: 'you\'re using this command (I assume at least), the gist is obvious. Get help.',
-  usage: `OR ${process.env.PREFIX}help <command>`,
-  execute (message, args) {
+class Help extends Command {
+  constructor () {
+    super({
+      name: 'help',
+      description: 'you\'re using this command (I assume at least), the gist is obvious. Get help.'
+    })
+  }
+
+  async run (message, args) {
     const commandsField = []
     message.client.commands.forEach(c => commandsField.push(c.name))
 
@@ -28,3 +33,5 @@ module.exports = {
     } else message.channel.send("Command doesn't exist")
   }
 }
+
+module.exports = Help

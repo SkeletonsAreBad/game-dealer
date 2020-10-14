@@ -1,3 +1,4 @@
+/*
 const chalk = require('chalk')
 
 module.exports = {
@@ -26,3 +27,20 @@ module.exports = {
     }
   }
 }
+*/
+const Command = require('../util/Command.js')
+
+class Reload extends Command {
+  constructor () {
+    super({
+      name: 'reload',
+      description: 'Reloads a command.'
+    })
+  }
+
+  async run (message, args) {
+    console.log('hello')
+  }
+}
+
+module.exports = Reload

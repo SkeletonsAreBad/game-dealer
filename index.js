@@ -1,21 +1,11 @@
 const { Client, Collection } = require('discord.js')
 const fs = require('fs')
 const chalk = require('chalk')
-const fetch = require('node-fetch')
+
+const { requestStores, initCommand } = require('./util/functions.js')
 
 const client = global.client = new Client()
-client.meta = new Collection()
-
 console.log(chalk.blueBright('[CLIENT]'), 'Starting client')
-
-// Store info
-console.log(chalk.blueBright('[CHEAPSHARK]'), 'Requesting store information')
-
-const requestStores = async () => {
-  const stores = await fetch('https://www.cheapshark.com/api/1.0/stores').then(res => res.json())
-
-  return stores
-}
 
 requestStores().then(stores => {
   client.gameStores = new Collection()
@@ -29,18 +19,23 @@ requestStores().then(stores => {
 
 // Collections
 client.commands = new Collection()
+client.aliases = new Collection()
 client.events = new Collection()
+client.meta = new Collection()
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
 
 // Command Handler
+initCommand()
+/*
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
   client.commands.set(command.name, command)
 
   console.log(chalk.blueBright('[COMMANDS]'), `Loaded ${command.name}`)
 }
+*/
 
 // Event Handler
 for (const file of eventFiles) {
@@ -60,8 +55,6 @@ for (const file of eventFiles) {
 }
 
 // Misc logging and errors
-
-console.info(chalk.greenBright('[COMMANDS]'), `${client.commands.size} commands have been loaded`)
 console.info(chalk.greenBright('[EVENTS]'), `${client.events.size} events have been loaded`)
 
 process.on('unhandledRejection', error => {

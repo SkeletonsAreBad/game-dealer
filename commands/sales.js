@@ -1,12 +1,17 @@
+const Command = require('../util/Command.js')
 const fetch = require('node-fetch')
 const { MessageEmbed } = require('discord.js')
 
-module.exports = {
-  name: 'sales',
-  descriptions: 'Gets all available sales for a game.',
-  args: true,
-  usage: '<game name>',
-  async execute (message, args) {
+class Sales extends Command {
+  constructor () {
+    super({
+      name: 'sales',
+      description: 'Gets all available sales for a game',
+      argsOnly: true
+    })
+  }
+
+  async run (message, args) {
     const res = await fetch(`https://www.cheapshark.com/api/1.0/deals?title=${args.join(' ')}`).then(response => response.json())
     res.sort((a, b) => parseFloat(a.salePrice) - parseFloat(b.salePrice))
 
@@ -29,3 +34,5 @@ module.exports = {
     message.channel.send(embed)
   }
 }
+
+module.exports = Sales
