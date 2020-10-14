@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const { Client, Collection } = require('discord.js')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -29,13 +27,14 @@ requestStores().then(stores => {
   console.info(chalk.greenBright('[CHEAPSHARK]'), `${client.gameStores.size} game stores are available`)
 })
 
-// Event/Command Handling
+// Collections
 client.commands = new Collection()
 client.events = new Collection()
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
 
+// Command Handler
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
   client.commands.set(command.name, command)
@@ -43,6 +42,7 @@ for (const file of commandFiles) {
   console.log(chalk.blueBright('[COMMANDS]'), `Loaded ${command.name}`)
 }
 
+// Event Handler
 for (const file of eventFiles) {
   const eventFunction = require(`./events/${file}`)
   const event = eventFunction.event || file.split('.')[0]
@@ -57,10 +57,16 @@ for (const file of eventFiles) {
   } catch (error) {
     console.error(error.stack)
   }
-
 }
+
+// Misc logging and errors
 
 console.info(chalk.greenBright('[COMMANDS]'), `${client.commands.size} commands have been loaded`)
 console.info(chalk.greenBright('[EVENTS]'), `${client.events.size} events have been loaded`)
 
+process.on('unhandledRejection', error => {
+  console.error(chalk.redBright('[ERROR]'), `Unhandled Promise Rejection: ${error}`)
+})
+
+// Client login
 client.login(process.env.DISCORD_TOKEN)

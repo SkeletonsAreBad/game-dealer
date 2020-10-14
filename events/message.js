@@ -2,18 +2,21 @@ const chalk = require('chalk')
 
 module.exports = {
   run: (message) => {
-
     if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) return
 
     const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/)
     const commandName = args.shift().toLowerCase()
 
-    if (!client.commands.has(commandName)) return
+    if (!global.client.commands.has(commandName)) return
 
-    const command = client.commands.get(commandName)
+    const command = global.client.commands.get(commandName)
 
     if (command.dmOnly && message.channel.type !== 'dm') return message.channel.send('This command cannot be executed in a DM.')
-      else if (command.guildOnly && message.channel.type === 'dm') return message.channel.send('This command can only be executed in a DM.')
+    else if (command.guildOnly && message.channel.type === 'dm') return message.channel.send('This command can only be executed in a DM.')
+
+    if (command.admin && !process.env.ADMINS.split(',').includes(message.author.id)) {
+      return message.channel.send('You do not have permission to execute this command.')
+    }
 
     if (command.args && !args.length) {
       let reply = 'You did not provide any arguments.'

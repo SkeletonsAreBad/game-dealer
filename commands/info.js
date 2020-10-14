@@ -1,5 +1,5 @@
 const { description, version, repository, homepage, dependencies } = require('../package.json')
-const { MessageEmbed, Message } = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   name: 'info',
@@ -7,7 +7,7 @@ module.exports = {
   execute (message, args) {
     const embed = new MessageEmbed()
       .setColor(process.env.EMBED_COLOR)
-      .setTitle(client.user.username)
+      .setTitle(message.client.user.username)
       .setURL(homepage)
       .setDescription(description)
       .setThumbnail(message.client.user.avatarURL())

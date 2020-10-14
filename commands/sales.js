@@ -26,6 +26,6 @@ module.exports = {
       .setDescription(prices.length ? `Here's what I could find for "${args.join(' ')}"` : `I couldn't find any sales for ${args.join(' ')}`)
       .addFields(prices)
 
-    message.channel.send(embed )
+    message.channel.send(embed)
   }
 }
