@@ -1,4 +1,4 @@
-const Command = require('../util/Command.js')
+const Command = require('../../util/Command.js')
 const { MessageEmbed } = require('discord.js')
 
 class Help extends Command {

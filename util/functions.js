@@ -15,13 +15,13 @@ const loadCommand = (cmdPath, name) => {
   try {
     const props = new (require(`${cmdPath}${path.sep}${name}`))()
     console.log(chalk.blueBright('[COMMANDS]'), `Loaded ${props.info.name}`)
-    props.conf.location = path
+    props.conf.location = cmdPath
     if (props.initCommand) {
       props.initCommand()
     }
     global.client.commands.set(props.info.name, props)
     props.conf.aliases.forEach(alias => {
-      global.client.aliases.set(alias, props.help.name)
+      global.client.aliases.set(alias, props.info.name)
     })
     return false
   } catch (error) { console.log({ error }) }

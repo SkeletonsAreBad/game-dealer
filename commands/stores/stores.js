@@ -1,4 +1,4 @@
-const Command = require('../util/Command.js')
+const Command = require('../../util/Command.js')
 
 class Stores extends Command {
   constructor () {

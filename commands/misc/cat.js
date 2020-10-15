@@ -1,11 +1,12 @@
-const Command = require('../util/Command.js')
+const Command = require('../../util/Command.js')
 const fetch = require('node-fetch')
 
 class Cat extends Command {
   constructor () {
     super({
       name: 'cat',
-      description: 'Get a cool random funny cat.'
+      description: 'Get a cool random funny cat.',
+      aliases: ['dog']
     })
   }
 

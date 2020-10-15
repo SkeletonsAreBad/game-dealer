@@ -28,18 +28,21 @@ module.exports = {
   }
 }
 */
-const Command = require('../util/Command.js')
+const Command = require('../../util/Command.js')
 
 class Reload extends Command {
   constructor () {
     super({
       name: 'reload',
-      description: 'Reloads a command.'
+      description: 'Reloads a command.',
+      argsOnly: true
     })
   }
 
   async run (message, args) {
-    console.log('hello')
+    const command = message.client.commands.get(args[0].toLowerCase())
+    if (!command) return message.channel.send('Command does not exist.')
+    // TODO: Make this work
   }
 }
 
