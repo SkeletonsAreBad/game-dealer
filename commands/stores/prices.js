@@ -34,6 +34,7 @@ class Prices extends Command {
       .setColor(process.env.EMBED_COLOR)
       .setTitle(`Prices for **${args.join(' 0')}**`)
       .setDescription(prices.length ? `Here's what I could find for "${args.join(' ')}"` : `I couldn't find anything for "${args.join(' ')}"`)
+      .setThumbnail(res[0].thumb)
       .addFields(prices)
     message.channel.send(embed)
   }
