@@ -1,5 +1,5 @@
 const Command = require('../../util/Command.js')
-const fetch = require('node-fetch')
+const axios = require('axios').default
 
 class Cat extends Command {
   constructor () {
@@ -11,7 +11,7 @@ class Cat extends Command {
   }
 
   async run (message, args) {
-    const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json())
+    const { file } = await axios.get('https://aws.random.cat/meow').then(res => res.data)
 
     message.channel.send(file)
   }

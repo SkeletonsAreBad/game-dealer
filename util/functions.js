@@ -1,10 +1,10 @@
-const fetch = require('node-fetch')
+const axios = require('axios').default
 const chalk = require('chalk')
 const klaw = require('klaw')
 const path = require('path')
 
 const requestStores = async () => {
-  const stores = await fetch('https://www.cheapshark.com/api/1.0/stores').then(res => res.json())
+  const stores = await axios.get('https://www.cheapshark.com/api/1.0/stores').then(res => res.data)
 
   console.log(chalk.blueBright('[CHEAPSHARK]'), 'Requesting store information')
 

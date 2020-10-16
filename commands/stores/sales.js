@@ -1,5 +1,5 @@
 const Command = require('../../util/Command.js')
-const fetch = require('node-fetch')
+const axios = require('axios').default
 const { MessageEmbed } = require('discord.js')
 
 class Sales extends Command {
@@ -12,7 +12,7 @@ class Sales extends Command {
   }
 
   async run (message, args) {
-    const res = await fetch(`https://www.cheapshark.com/api/1.0/deals?title=${args.join(' ')}`).then(response => response.json())
+    const res = await axios.get(`https://www.cheapshark.com/api/1.0/deals?title=${args.join(' ')}`).then(res => res.data)
     res.sort((a, b) => parseFloat(a.salePrice) - parseFloat(b.salePrice))
 
     const prices = []
