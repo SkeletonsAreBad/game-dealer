@@ -35,7 +35,8 @@ class Reload extends Command {
     super({
       name: 'reload',
       description: 'Reloads a command.',
-      argsOnly: true
+      argsOnly: true,
+      category: 'Admin'
     })
   }
 

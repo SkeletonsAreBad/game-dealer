@@ -5,39 +5,34 @@ const chalk = require('chalk')
 const { requestStores, initCommand } = require('./util/functions.js')
 
 const client = global.client = new Client()
-console.log(chalk.blueBright('[CLIENT]'), 'Starting client')
-
-requestStores().then(stores => {
-  client.gameStores = new Collection()
-
-  for (const store of stores) {
-    client.gameStores.set(store.storeID, store.storeName)
-  }
-
-  console.log(chalk.greenBright('[CHEAPSHARK]'), `${client.gameStores.size} game stores are available`)
-})
 
 // Collections
 client.commands = new Collection()
 client.aliases = new Collection()
+client.gameStores = new Collection()
 client.events = new Collection()
 client.meta = new Collection()
 
-// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
+console.log(chalk.blueBright('[CLIENT]'), 'Starting client')
+
+requestStores().then(stores => {
+  if (stores === false) {
+    client.gameStores.set('unavailable', true)
+    console.log(chalk.bgRed('[SEVERE]'), 'Cheapshark stores are unavailable')
+  } else {
+    for (const store of stores) {
+      client.gameStores.set(store.storeID, store.storeName)
+    }
+    console.log(chalk.greenBright('[CHEAPSHARK]'), `${client.gameStores.size} game stores are available`)
+  }
+})
 
 // Command Handler
 initCommand()
-/*
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`)
-  client.commands.set(command.name, command)
-
-  console.log(chalk.blueBright('[COMMANDS]'), `Loaded ${command.name}`)
-}
-*/
 
 // Event Handler
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
+
 for (const file of eventFiles) {
   const eventFunction = require(`./events/${file}`)
   const event = eventFunction.event || file.split('.')[0]

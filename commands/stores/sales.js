@@ -7,7 +7,8 @@ class Sales extends Command {
     super({
       name: 'sales',
       description: 'Gets all available sales for a game',
-      argsOnly: true
+      argsOnly: true,
+      category: 'Stores'
     })
   }
 

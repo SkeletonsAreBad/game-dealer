@@ -7,7 +7,8 @@ class Prices extends Command {
     super({
       name: 'prices',
       description: 'Gets all available prices for a game.',
-      argsOnly: true
+      argsOnly: true,
+      category: 'Stores'
     })
   }
 

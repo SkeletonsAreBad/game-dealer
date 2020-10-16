@@ -4,7 +4,8 @@ class Stores extends Command {
   constructor () {
     super({
       name: 'stores',
-      description: 'View available stores.'
+      description: 'View available stores.',
+      category: 'Stores'
     })
   }
 

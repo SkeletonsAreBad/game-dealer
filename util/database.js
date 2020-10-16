@@ -6,24 +6,16 @@ const db = new Sequelize(process.env.POSTGRES_URI, {
 })
 
 // Models
-const customPrefix = db.define('prefix', {
-  prefix: {
-    type: Sequelize.STRING
+const settings = db.define('guild', {
+  channelID: {
+    type: Sequelize.BIGINT,
+    allowNull: true
   },
-  guild: {
-    type: Sequelize.INTEGER,
+  guildID: {
+    type: Sequelize.BIGINT,
+    allowNull: false,
     unique: true
   }
 })
 
-const feedChannel = db.define('channel', {
-  channel: {
-    type: Sequelize.INTEGER
-  },
-  guild: {
-    type: Sequelize.INTEGER,
-    unique: true
-  }
-})
-
-module.exports = { db, customPrefix, feedChannel }
+module.exports = { db, settings }
