@@ -2,7 +2,7 @@ class Command {
   constructor ({
     name = null,
     description = 'None provided',
-    usage = null,
+    usage = '',
     category = 'Miscellaneous',
     aliases = [],
     dmOnly = false,

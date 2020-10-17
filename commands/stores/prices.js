@@ -8,7 +8,8 @@ class Prices extends Command {
       name: 'prices',
       description: 'Gets all available prices for a game.',
       argsOnly: true,
-      category: 'Stores'
+      category: 'Stores',
+      usage: '<game>'
     })
   }
 

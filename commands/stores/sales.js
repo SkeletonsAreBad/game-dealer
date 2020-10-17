@@ -8,7 +8,8 @@ class Sales extends Command {
       name: 'sales',
       description: 'Gets all available sales for a game',
       argsOnly: true,
-      category: 'Stores'
+      category: 'Stores',
+      usage: '<game>'
     })
   }
 
