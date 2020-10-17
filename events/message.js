@@ -7,9 +7,7 @@ module.exports = {
 
     if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) return
 
-    console.log(global.client.prefix)
-
-    const args = message.content.slice(process.env.PREFIX).trim().split(/ +/)
+    const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/)
     const commandName = args.shift().toLowerCase()
 
     if (!message.client.commands.has(commandName)) return
@@ -29,10 +27,6 @@ module.exports = {
       if (command.info.usage) reply += `\nUsage: \`${process.env.PREFIX}${command.info.name} ${command.info.usage}\``
 
       return message.channel.send(reply)
-    }
-
-    if (command.info.category === 'Stores' && message.client.gameStores.has('unavailable', true)) {
-      return message.channel.send('Cannot connect to Cheapshark. Try again later.')
     }
 
     try {

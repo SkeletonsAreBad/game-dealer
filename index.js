@@ -16,15 +16,10 @@ client.meta = new Collection()
 console.log(chalk.blueBright('[CLIENT]'), 'Starting client')
 
 requestStores().then(stores => {
-  if (stores === false) {
-    client.gameStores.set('unavailable', true)
-    console.log(chalk.bgRed('[SEVERE]'), 'Cheapshark stores are unavailable')
-  } else {
-    for (const store of stores) {
-      client.gameStores.set(store.storeID, store.storeName)
-    }
-    console.log(chalk.greenBright('[CHEAPSHARK]'), `${client.gameStores.size} game stores are available`)
+  for (const store of stores) {
+    client.gameStores.set(store.storeID, store.storeName)
   }
+  console.log(chalk.greenBright('[CHEAPSHARK]'), `${client.gameStores.size} game stores are available`)
 })
 
 // Command Handler
