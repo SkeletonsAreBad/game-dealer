@@ -29,7 +29,7 @@ class Feed extends Command {
 
       message.channel.send(embed)
 
-      await message.settings.update({ channelID: args[0] }, { where: { guildID: message.guild.id } })
+      await message.settings.update({ channelID: channel.id }, { where: { guildID: message.guild.id } })
     } catch (error) { message.channel.send('I can\'t find this channel, try again and check spelling.') }
   }
 }
