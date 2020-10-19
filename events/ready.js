@@ -25,7 +25,14 @@ module.exports = {
       internalName: 'yo'
     }]
 
-    global.client.guilds.cache.forEach((guild) => {
+    global.client.guilds.cache.forEach(async (guild) => {
+      try {
+        await settings.create({
+          channelID: null,
+          guildID: guild.id
+        })
+      } catch (error) { console.error(chalk.redBright('[ERROR]', `Error initialising DBs: ${error}`)) }
+
       setInterval(async () => {
         const deals = await axios.get('https://www.cheapshark.com/api/1.0/deals?onSale=1&storeID=1').then(res => res.data)
 
@@ -62,7 +69,7 @@ module.exports = {
           }
         }
         old = deals
-      }, 5000)
+      }, 600000)
     })
   }
 }

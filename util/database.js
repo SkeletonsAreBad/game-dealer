@@ -13,8 +13,7 @@ const settings = db.define('guild', {
   },
   guildID: {
     type: Sequelize.BIGINT,
-    allowNull: false,
-    unique: true
+    allowNull: false
   }
 })
 
