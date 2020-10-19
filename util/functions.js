@@ -36,4 +36,6 @@ const initCommand = async () => {
   })
 }
 
-module.exports = { requestStores, initCommand, loadCommand }
+const wait = require('util').promisify(setTimeout)
+
+module.exports = { requestStores, initCommand, loadCommand, wait }

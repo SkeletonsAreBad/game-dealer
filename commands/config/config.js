@@ -22,7 +22,7 @@ class Config extends Command {
     const embed = new MessageEmbed()
       .setColor(process.env.EMBED_COLOR)
       .setTitle(`Settings for **${message.guild.name}**`)
-      .addField('Feed Channel', feed, true)
+      .addField('Feed Channel', message.client.channels.cache.get(feed), true)
 
     message.channel.send(embed)
   }
