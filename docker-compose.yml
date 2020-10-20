@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  bot:
+    image: game-dealer:1.0
+    build: .
+    command: sh -c "npm start"
+    env_file:
+      - .env
+    networks:
+      - postgres
+    depends_on: 
+        - postgres
+    restart: always
+
+  postgres:
+    image: postgres:12.2-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:

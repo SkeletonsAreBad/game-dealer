@@ -26,7 +26,7 @@ class Feed extends Command {
       const guildSettings = await message.settings.findOne({ where: { guildID: message.guild.id } })
       const feed = guildSettings.channelID ? guildSettings.channelID : 'None'
 
-      const oldChannel = message.client.channels.cache.get(feed)
+      const oldChannel = message.client.channels.cache.get(feed) ? message.client.channels.cache.get(feed) : 'None'
 
       const embed = new MessageEmbed()
         .setColor(process.env.EMBED_COLOR)

@@ -1,1 +1,1 @@
-docker run --env-file=.env -t -d game-dealer:1.0
+docker run --name gamedealer --network gamedealer --env-file=.env -t -d game-dealer:1.0
